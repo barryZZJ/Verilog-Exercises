@@ -17,7 +17,6 @@ module comp(
                 {GT, LT, EQ} <= 3'b001;
             else
                 {GT, LT, EQ} <= 3'b010;
-            end
-        end
+        
     end
 endmodule // 

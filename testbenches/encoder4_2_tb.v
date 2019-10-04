@@ -20,9 +20,8 @@ module tb_encoder4_2;
         .LED (LED)
     );
 
-    initial begin
-        forever #(PERIOD/2)  clk=~clk;
-    end
+    always #(PERIOD/2) 
+        clk=~clk;
 
     initial begin
         forever #(10) begin

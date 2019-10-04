@@ -4,43 +4,52 @@ module main(
 );
 
     parameter T1MS = 10**5;
-    //integer count=0;
+    integer count=0;
     integer pos=0;
     integer num=0;
 
-    always @(pos,num) begin
-        display_num(pos, num, 0, DISP);
+    always @(posedge CLK) begin
+        display_num(num, 1, DISP);
     end
 
-    always @(posedge CLK) begin
+    // always @(pos,num) begin
+    //     display_num(pos, num, 0, DISP);
+    // end
+
+    // always @(posedge CLK) begin
         
-        //count <= count + 1;
-        //if (count == T1MS*200) begin //200ms
-            //count <= 0;
+    //     count <= count + 1;
+    //     if (count == T1MS*200) begin //200ms
+    //         count <= 0;
+    //         num <= num + 1;
+    //         if(num == 9)
+    //             num <= 0;
+
+    //         pos <= pos + 1;
+    //         if(pos == 3)
+    //             pos <= 0;
+    //     end
+    // end
+    
+    always @(posedge CLK) begin
+        count <= count + 1;
+        if (count == T1MS*50) begin //200ms
+            count <= 0;
             num <= num + 1;
             if(num == 9)
                 num <= 0;
-
-            pos <= pos + 1;
-            if(pos == 3)
-                pos <= 0;
-        //end
+        end
     end
 
     task display_num;
-        input integer pos; //which digit to show
+        //input integer pos; //which digit to show
         input [3:0] num; //digit number
         input dp; //show dot
         output reg [11:0] DISP; //displayer
         begin
-            case (pos)
-                0: DISP[11:8] <= 4'b0111;
-                1: DISP[11:8] <= 4'b1011;
-                2: DISP[11:8] <= 4'b1101;
-                3: DISP[11:8] <= 4'b1110;
-                default: DISP[11:8] <= 4'b1111;
-            endcase
-
+            
+            DISP[11:8] <= 4'b0000;
+                
             case (num)
                 0: DISP[7:1] <= 7'b0000001;
                 1: DISP[7:1] <= 7'b1001111;
