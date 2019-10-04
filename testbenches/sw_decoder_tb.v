@@ -1,23 +1,26 @@
-//开关代表二进制数，只用到13个开关，用数码管显示对应的10进制数
+`timescale  1ns / 1ps
 
-module sw_decoder(
-    input CLK,
-    input [12:0] SW,
-    output[11:0] DISP
-);
-    parameter T1MS = 10**5;
-    parameter interval = T1MS;
+module test;
+
+    reg CLK=0;
+
+    reg [12:0] SW=0;
+    wire [11:0] DISP;
+
+    always #(5)
+        CLK = ~CLK;
+    
     reg [3:0] posb;
     reg [3:0] num;
     reg dp = 0;
 
-    display_num #(interval) u_dnm(.CLK(CLK), .posb(posb), .num(num), .dp(dp), .DISP(DISP));
+    display_num #(5) u_dnm(.CLK(CLK), .posb(posb), .num(num), .dp(dp), .DISP(DISP));
 
     integer counter = 0;
     reg [1:0] pos = 0;
     always @(posedge CLK) begin
         counter <= counter + 1;
-        if (counter == interval) begin
+        if (counter == 5) begin
             counter <= 0;
             pos <= pos + 1;
             if(pos == 3)
@@ -40,7 +43,7 @@ module sw_decoder(
     b <= (SW/100)%10;
     a <= (SW/1000)%10;
 */
-    always @(SW) begin
+    always @(posedge CLK) begin
         case (pos)
             0: num <= SW%10;
             1: num <= (SW/10)%10 == 0 ? 10 : (SW/10)%10;
@@ -50,4 +53,42 @@ module sw_decoder(
         endcase
     end
 
-endmodule // 
+    initial begin
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        #20
+        SW = SW + 1;
+        $finish;
+    end
+
+        
+
+endmodule
