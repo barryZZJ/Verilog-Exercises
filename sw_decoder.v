@@ -6,7 +6,7 @@ module sw_decoder(
     output[11:0] DISP
 );
     parameter T1MS = 10**5;
-    parameter interval = T1MS;
+    parameter interval = T1MS/2;
     reg [3:0] posb;
     reg [3:0] num;
     reg dp = 0;
@@ -43,9 +43,9 @@ module sw_decoder(
     always @(SW) begin
         case (pos)
             0: num <= SW%10;
-            1: num <= (SW/10)%10 == 0 ? 10 : (SW/10)%10;
-            2: num <= (SW/100)%10 == 0 ? 10 : (SW/100)%10;
-            3: num <= (SW/1000)%10 == 0 ? 10 : (SW/1000)%10;
+            1: num <= SW>=10 ? (SW/10)%10 : 10;
+            2: num <= SW>=100 ? (SW/100)%10 : 10;
+            3: num <= SW>=1000 ? (SW/1000)%10 : 10;
             default: num <= 10;
         endcase
     end

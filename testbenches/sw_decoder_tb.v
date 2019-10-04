@@ -46,9 +46,9 @@ module test;
     always @(posedge CLK) begin
         case (pos)
             0: num <= SW%10;
-            1: num <= (SW/10)%10 == 0 ? 10 : (SW/10)%10;
-            2: num <= (SW/100)%10 == 0 ? 10 : (SW/100)%10;
-            3: num <= (SW/1000)%10 == 0 ? 10 : (SW/1000)%10;
+            1: num <= SW>=10 ? (SW/10)%10 : 10;
+            2: num <= SW>=100 ? (SW/100)%10 : 10;
+            3: num <= SW>=1000 ? (SW/1000)%10 : 10;
             default: num <= 10;
         endcase
     end
