@@ -7,10 +7,10 @@ module comp(
     output reg GT, LT, EQ
 );
     always @(posedge CLK, negedge RST) begin
-        if (RST) begin
+        if (RST) 
             {GT, LT, EQ} <= 3'b0;
-            end
-        else begin
+            
+        else
             if (A>B) 
                 {GT, LT, EQ} <= 3'b100;
             else if (A==B)
