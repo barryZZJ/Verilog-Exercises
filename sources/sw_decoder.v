@@ -40,7 +40,7 @@ module sw_decoder(
     b <= (SW/100)%10;//百位
     a <= (SW/1000)%10;//千位
 */
-    always @(SW) begin
+    always @(CLK) begin
         case (pos)
             0: num <= SW%10;
             1: num <= SW>=10 ? (SW/10)%10 : 10;

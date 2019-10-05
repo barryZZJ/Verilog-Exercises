@@ -10,15 +10,15 @@ reg [2:0] d;
 reg [1:0] s;
 wire [2:0] y;
 
-mux4_1 utt
-(
+parameter type = 1; //0:module, 1: IP
+
+top #(type) utt(
     .a(a),
     .b(b),
     .c(c),
     .d(d),
     .s(s),
-    .y(y)
-);
+    .y(y));
 
 localparam CLK_PERIOD = 10;
 always #(CLK_PERIOD/2) clk=~clk;
