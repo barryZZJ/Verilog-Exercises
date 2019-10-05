@@ -29,6 +29,8 @@ set_property PACKAGE_PIN R3 [get_ports {SW[11]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {SW[11]}]
 set_property PACKAGE_PIN W2 [get_ports {SW[12]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {SW[12]}]
+set_property PACKAGE_PIN U1 [get_ports {SW[13]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {SW[13]}]
 
 
 #[11:0]数码管

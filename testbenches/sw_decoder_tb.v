@@ -4,7 +4,7 @@ module test;
 
     reg CLK=0;
 
-    reg [12:0] SW=0;
+    reg [13:0] SW=0;
     wire [11:0] DISP;
 
     always #(5)

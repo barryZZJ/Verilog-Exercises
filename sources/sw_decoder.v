@@ -2,7 +2,7 @@
 
 module sw_decoder(
     input CLK,
-    input [12:0] SW,
+    input [13:0] SW,
     output[11:0] DISP
 );
     parameter T1MS = 10**5;
@@ -35,10 +35,10 @@ module sw_decoder(
         endcase
     end
 /*
-    d <= SW%10;
-    c <= (SW/10)%10;
-    b <= (SW/100)%10;
-    a <= (SW/1000)%10;
+    d <= SW%10;//个位
+    c <= (SW/10)%10;//十位
+    b <= (SW/100)%10;//百位
+    a <= (SW/1000)%10;//千位
 */
     always @(SW) begin
         case (pos)
