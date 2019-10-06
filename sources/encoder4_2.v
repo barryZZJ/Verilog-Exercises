@@ -1,4 +1,6 @@
-//编码器，四个开关，第i个开关为0时对应第i个led亮
+//四位编码器
+//四个输入转为二进制输出
+//第i个开关为0时，对应第i个led亮
 module encoder4_2(
     input[3:0] SW,
     output reg[1:0] LED
