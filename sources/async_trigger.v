@@ -1,3 +1,4 @@
+//异步触发器
 module async_trigger(clk,
                      d,
                      q,

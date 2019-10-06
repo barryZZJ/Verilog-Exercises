@@ -1,4 +1,5 @@
-module main(
+//a simple module to display nums (using task)
+module display_test1(
     input CLK,
     output reg[11:0] DISP
 );
@@ -8,48 +9,39 @@ module main(
     integer pos=0;
     integer num=0;
 
-    always @(posedge CLK) begin
-        display_num(num, 1, DISP);
+    always @(pos,num) begin
+        display_num(pos, num, 0, DISP);
     end
 
-    // always @(pos,num) begin
-    //     display_num(pos, num, 0, DISP);
-    // end
-
-    // always @(posedge CLK) begin
-        
-    //     count <= count + 1;
-    //     if (count == T1MS*200) begin //200ms
-    //         count <= 0;
-    //         num <= num + 1;
-    //         if(num == 9)
-    //             num <= 0;
-
-    //         pos <= pos + 1;
-    //         if(pos == 3)
-    //             pos <= 0;
-    //     end
-    // end
-    
     always @(posedge CLK) begin
+        
         count <= count + 1;
-        if (count == T1MS*50) begin //200ms
+        if (count == T1MS*200) begin //200ms
             count <= 0;
             num <= num + 1;
             if(num == 9)
                 num <= 0;
+
+            pos <= pos + 1;
+            if(pos == 3)
+                pos <= 0;
         end
     end
 
     task display_num;
-        //input integer pos; //which digit to show
+        input integer pos; //which digit to show
         input [3:0] num; //digit number
         input dp; //show dot
         output reg [11:0] DISP; //displayer
         begin
-            
-            DISP[11:8] <= 4'b0000;
-                
+            case (pos)
+                0: DISP[11:8] <= 4'b0111;
+                1: DISP[11:8] <= 4'b1011;
+                2: DISP[11:8] <= 4'b1101;
+                3: DISP[11:8] <= 4'b1110;
+                default: DISP[11:8] <= 4'b1111;
+            endcase
+
             case (num)
                 0: DISP[7:1] <= 7'b0000001;
                 1: DISP[7:1] <= 7'b1001111;

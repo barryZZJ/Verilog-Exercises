@@ -1,5 +1,5 @@
+//switch decoder, decode switch binary into decimal and show on DISPLAY
 //开关代表二进制数，只用到13个开关，用数码管显示对应的10进制数
-
 module sw_decoder(
     input CLK,
     input [13:0] SW,

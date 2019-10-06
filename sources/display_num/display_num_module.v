@@ -1,11 +1,11 @@
 module display_num(
     input CLK,
-    input[3:0] posb, //0 to show corresponding digit
-    input[3:0] num, //digit number
-    input dp, //show dot
+    input[3:0] posb, // 4 digit binary, pos of the num, 0 to show corresponding digit(e.g. 1011 - show 2nd digit)
+    input[3:0] num, // 0-9 integer, indicate which num to display
+    input dp, //bool, show dot or not
     output reg[11:0] DISP
 );
-    parameter interval = 10**5*1000;
+    parameter interval = 10**5*200;
     integer counter = 0;
     
     always @(posedge CLK) begin
