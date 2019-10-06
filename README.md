@@ -1,6 +1,8 @@
 # Verilog-Exercises
  Digital Logic exercises with BASYS3 board
  
+[记的很乱的笔记](https://blog.csdn.net/zhouzejun1/article/details/102006331)（404不存在说明我刚更新过内容还在审核中，等一会就好了）
+
 ---
 sources 是HDL代码
 
