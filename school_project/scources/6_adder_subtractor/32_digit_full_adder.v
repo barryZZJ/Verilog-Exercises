@@ -1,6 +1,6 @@
 //实验六 加减法器
 //32位全加器
-module 32_full_adder(input cin,
+module full_adder_32(input cin,
                      input[31:0] x,
                      input[31:0] y,
                      output[31:0] s,

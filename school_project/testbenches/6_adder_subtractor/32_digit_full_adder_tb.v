@@ -1,4 +1,4 @@
-`timescale 1np / 1ps
+`timescale 1ns / 1ps
 
 module tb_module_name;
 
@@ -21,7 +21,7 @@ module tb_module_name;
         y = 32'b0;
     end
 
-    32_digit_full_adder utt
+    full_adder_32 utt
     (
         //.rst_n (rst_n),
         //.clk (clk),
@@ -39,6 +39,10 @@ module tb_module_name;
 
     initial begin
         //test code here
+        repeat(10) #5 begin
+            x = x+1;
+            y = y+5;
+        end
 
         $finish;
     end
