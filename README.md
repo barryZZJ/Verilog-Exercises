@@ -6,7 +6,7 @@
 ---
 sources 是HDL代码
 
-constrains 是约束文件
+constrains 是约束文件（里面的all.xdc包含了板子上所有引脚的约束信息）
 
 testbenches 是仿真代码
 
