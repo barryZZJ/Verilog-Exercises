@@ -9,15 +9,16 @@ module full_subtractor_32(input [31:0]x,
     
     function ones_complement; //反码
         input [31:0] x;
-        ones_complement = x^32'bffffffff;
+        ones_complement = x^32'hffffffff;
     endfunction
 
     genvar i;
     generate
         for (i = 0; i<=31; i=i+1) begin: stage
             full_adder u_subtractor(.cin(c[i]),
-                                    .x(x),
-                                    .y(ones_complement(y)),
+                                    .x(x[i]),
+                                    .y(ones_complement(y[i])),
+                                    .s(r[i]),
                                     .cout(c[i+1])
                                     );
         end

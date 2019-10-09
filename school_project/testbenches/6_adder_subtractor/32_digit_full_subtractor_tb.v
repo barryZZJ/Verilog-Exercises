@@ -25,7 +25,7 @@ module full_subtractor_32_tb;
         //.clk (clk),
         .x(x),
         .y(y),
-        .s(s),
+        .r(r)
     );
 
     localparam CLK_PERIOD = 10;
