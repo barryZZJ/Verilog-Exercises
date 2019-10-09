@@ -16,6 +16,14 @@ wire output_1;
 //module_name Parameters (if any)
 //parameter param_1 = 0;
 
+initial begin
+    clk=0;
+    //initialize input values
+    //e.g
+    //input_1 = 4'b0110;
+    //input_2 = 5;
+end
+
 //instantiate test module
 module_name utt
 (
@@ -29,15 +37,6 @@ module_name utt
 localparam CLK_PERIOD = 10; //clock period (ns)
 always #(CLK_PERIOD/2) 
     clk=~clk; // simulate clock tick every 'CLK_PERIOD/2' ns
-
-
-initial begin
-    clk=0;
-    //initialize input values
-    //e.g
-    //input_1 = 4'b0110;
-    //input_2 = 5;
-end
 
 initial begin
     //test code here
