@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module tb_module_name;
+module full_adder_32_tb;
 
     reg clk;
     //reg rst_n;
@@ -15,7 +15,7 @@ module tb_module_name;
     wire cout;
 
     initial begin
-        clk=0;
+        clk = 0;
         cin = 0;
         x = 32'b0;
         y = 32'b0;

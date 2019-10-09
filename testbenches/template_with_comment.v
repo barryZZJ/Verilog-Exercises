@@ -17,7 +17,7 @@ module tb_module_name;
     //parameter param_1 = 0;
 
     initial begin
-        clk=0;
+        clk = 0;
         //initialize input values
         //e.g
         //input_1 = 4'b0110;
