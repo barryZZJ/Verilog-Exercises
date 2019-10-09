@@ -5,10 +5,14 @@ module full_adder_32(input cin,
                      input[31:0] y,
                      output[31:0] s,
                      output cout);
+    wire [32:0] c;
+    assign c[0] = cin;
+    assign cout = c[32];
+    
     genvar i;
     generate
-        for(i=0; i<32; i=i+1) begin:stage
-            full_adder u_fadder(.cin(cin), .x(x[i]), .y(y[i]), .s(s[i]), .cout(cout));
+        for(i=0; i<=31; i=i+1) begin:stage
+            full_adder u_fadder(.cin(c[i]), .x(x[i]), .y(y[i]), .s(s[i]), .cout(c[i+1]));
         end
     endgenerate
 
