@@ -2,29 +2,40 @@
 
 module tb_module_name;
 
+//simulated clock & reset
 reg clk;
 //reg rst_n;
 
-//Inputs
+//module_name Input ports
 reg input_1;
 reg input_2;
 
-//Outputs
+//module_name Output ports
 wire output_1;
 
+//module_name Parameters (if any)
+//parameter param_1 = 0;
 
+//instantiate test module
+module_name utt
 (
+    //input/output port_name here
+    //eg:
     //.rst_n (rst_n),
     //.clk (clk),
+    //.led(input_1)
 );
 
-localparam CLK_PERIOD = 10;
+localparam CLK_PERIOD = 10; //clock period (ns)
 always #(CLK_PERIOD/2) 
-    clk=~clk;
+    clk=~clk; // simulate clock tick every 'CLK_PERIOD/2' ns
 
 
 initial begin
-    clk=0;
+    //initialize input values
+    //e.g
+    //input_1 = 4'b0110;
+    //input_2 = 5;
 end
 
 initial begin
