@@ -12,7 +12,7 @@ module tb_top;
     reg[1:0] operand_control;
 
     //Outputs
-    wire disp;
+    wire[11:0] DISP;
 
     initial begin
         clk = 0;
@@ -22,7 +22,7 @@ module tb_top;
         operand_control = 0;
     end
     
-    top utt
+    top #(1) utt
     (
         //.rst_n (rst_n),
         .CLK (clk),
@@ -30,7 +30,7 @@ module tb_top;
         .b(b),
         .add_sub_signal(add_sub_signal),
         .operand_control(operand_control),
-        .DISP(disp)
+        .DISP(DISP)
     );
 
     localparam CLK_PERIOD = 10;
@@ -41,7 +41,7 @@ module tb_top;
         //test code here
         repeat(2) # 5 begin //加法还是减法
             repeat(3) # 5 begin //控制三种显示内容
-                repeat(3) # 5 begin //a, b值的变化
+                repeat(3) # (5*CLK_PERIOD) begin //a, b值的变化
                     a = a + 5;
                     b = b + 1;
                 end

@@ -2,7 +2,8 @@
 //将SW15~SW12作为第一操作数低4位，SW11~SW8作为第二操作数低4位，
 //SW0=0（1）时做加（减）法，
 //添加选择控制SW1~SW2，能选择将操作数1或操作数2或结果显示在7段数码管上。
-module top(input CLK,
+module top #(parameter INTERVAL = 10**5*200)
+          (input CLK,
            input[3:0] a, //sw15~sw12
            input[3:0] b, //sw11~sw8
            input add_sub_signal, //sw0
@@ -16,9 +17,9 @@ module top(input CLK,
     full_adder_32 u_fadder_32(1'b0, {28'b0,a}, {28'b0,b}, s_add);
     full_subtractor_32 u_fsub_32({28'b0,a}, {28'b0,b}, s_sub);
 
-    display_16bto4h u_disp(CLK, s[15:0], DISP);
+    display_16bto4h #(INTERVAL) u_disp(CLK, s[15:0], DISP);
 
-    always @(a, b, add_sub_signal, operand_control) begin
+    always @(a, b, add_sub_signal, operand_control, s_add, s_sub) begin
         case (operand_control)
             0: begin //显示结果
                 case (add_sub_signal)

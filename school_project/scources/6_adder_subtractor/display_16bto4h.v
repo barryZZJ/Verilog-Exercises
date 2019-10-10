@@ -1,6 +1,6 @@
 //数码管显示模块
 //能将16位的二进制数以十六进制形式显示到4个七段数码管上
-module display_16bto4h #(parameter interval = 10*5*200)
+module display_16bto4h #(parameter INTERVAL = 10*5*200)
                         (input CLK,
                          input [15:0] x,
                          output reg[11:0] DISP);
@@ -9,12 +9,16 @@ module display_16bto4h #(parameter interval = 10*5*200)
     reg CLK_2 = 0;
 
     reg[1:0] sel = 0; //选择显示哪一位
-    reg[3:0] posb; //对应DISP前4位数
+    wire[3:0] posb; //对应DISP前4位数
+    reg[3:0] digit; //对应x的某4位
+    integer i;
 
     always @(posedge CLK) begin
         counter <= counter + 1;
-        if (counter == interval) 
+        if (counter == INTERVAL)begin
             CLK_2 = ~CLK_2;
+            counter <= 0;
+        end
     end
 
     always @(posedge CLK_2) begin
@@ -22,12 +26,18 @@ module display_16bto4h #(parameter interval = 10*5*200)
         if (sel == 3)
             sel <= 0;
     end
+    always @(sel) begin
+        digit[0] <= x[sel*4];
+        digit[1] <= x[sel*4 + 1];
+        digit[2] <= x[sel*4 + 2];
+        digit[3] <= x[sel*4 + 3];
+    end
 
     decoder2to4 u_dec(sel, posb);//decode sel into posb
 
     function [6:0] btohDISP;
-        input[3:0] x;//display 4'bin into hex display
-        case (x)
+        input[3:0] digit;//display 4'bin into hex display
+        case (digit)
             4'h0:    btohDISP = 7'b0000001;
             4'h1:    btohDISP = 7'b1001111;
             4'h2:    btohDISP = 7'b0010010;
@@ -50,7 +60,7 @@ module display_16bto4h #(parameter interval = 10*5*200)
     endfunction
 
     always @(posedge CLK_2) begin
-        DISP <= {posb, btohDISP(x[ sel*4 : (sel+1)*4-1 ]), 1'b0};
+        DISP <= {posb, btohDISP(digit), 1'b1};
     end
 
 
