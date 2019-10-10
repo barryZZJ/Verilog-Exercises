@@ -1,6 +1,6 @@
 //把2位二进制码解码成4位独热码(低电平有效)
 module decoder2to4(input[1:0] x,
-                   output[3:0] y);
+                   output reg[3:0] y);
     always @(x) begin
         case (x)
             2'b00: y = 4'b1110;

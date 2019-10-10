@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module full_subtractor_32_tb;
+module tb_full_subtractor_32;
 
     reg clk;
     //reg rst_n;
