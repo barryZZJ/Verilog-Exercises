@@ -3,11 +3,9 @@
 module full_adder_32(input cin,
                      input[31:0] x,
                      input[31:0] y,
-                     output[31:0] s,
-                     output cout);
+                     output[31:0] s);
     wire [32:0] c;
     assign c[0] = cin;
-    assign cout = c[32];
     
     genvar i;
     generate
