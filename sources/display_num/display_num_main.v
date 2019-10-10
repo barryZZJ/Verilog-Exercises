@@ -3,7 +3,7 @@ module main_disp_num(
     output[11:0] DISP
 );
     parameter T1MS = 10**5;
-    parameter interval = T1MS*500;
+    parameter interval = T1MS/2;
     integer counter = 0;
     reg[3:0] num=4'b0;
     reg[3:0] posb=4'b0011;

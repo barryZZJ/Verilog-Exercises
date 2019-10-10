@@ -2,7 +2,7 @@
 //将SW15~SW12作为第一操作数低4位，SW11~SW8作为第二操作数低4位，
 //SW0=0（1）时做加（减）法，
 //添加选择控制SW1~SW2，能选择将操作数1或操作数2或结果显示在7段数码管上。
-module top #(parameter INTERVAL = 10**5*200)
+module top #(parameter INTERVAL = 10**5/2)
           (input CLK,
            input[3:0] a, //sw15~sw12
            input[3:0] b, //sw11~sw8

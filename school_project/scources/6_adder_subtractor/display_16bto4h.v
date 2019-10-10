@@ -1,6 +1,6 @@
 //数码管显示模块
 //能将16位的二进制数以十六进制形式显示到4个七段数码管上
-module display_16bto4h #(parameter INTERVAL = 10*5*200)
+module display_16bto4h #(parameter INTERVAL = 10*5/2)
                         (input CLK,
                          input [15:0] x,
                          output reg[11:0] DISP);
@@ -52,7 +52,7 @@ module display_16bto4h #(parameter INTERVAL = 10*5*200)
             4'hb:    btohDISP = 7'b1100000;
             4'hc:    btohDISP = 7'b0110001;
             4'hd:    btohDISP = 7'b1000010;
-            4'he:    btohDISP = 7'b0010000;
+            4'he:    btohDISP = 7'b0110000;
             4'hf:    btohDISP = 7'b0111000;
             default: btohDISP = 7'b1111111;
         endcase

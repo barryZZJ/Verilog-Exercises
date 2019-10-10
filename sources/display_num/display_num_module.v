@@ -5,7 +5,7 @@ module display_num(
     input dp, //bool, show dot or not
     output reg[11:0] DISP
 );
-    parameter interval = 10**5*200;
+    parameter interval = 10**5/2;
     integer counter = 0;
     
     always @(posedge CLK) begin
