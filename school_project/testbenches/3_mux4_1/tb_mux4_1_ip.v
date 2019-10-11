@@ -1,3 +1,4 @@
+`timescale 1ps / 1ps
 module tb_mux4to1_ip;
 
 reg [2:0] w0;

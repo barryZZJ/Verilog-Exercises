@@ -1,8 +1,10 @@
 //数码管显示模块
 //能将16位的二进制数以十六进制形式显示到4个七段数码管上
+//负数则小数点代表负号
 module display_16bto4h #(parameter INTERVAL = 10*5/2)
                         (input CLK,
                          input [15:0] x,
+                         input [3:0] neg, //各位是否为负数
                          output reg[11:0] DISP);
 
     integer counter = 0;
@@ -11,6 +13,8 @@ module display_16bto4h #(parameter INTERVAL = 10*5/2)
     reg[1:0] sel = 0; //选择显示哪一位
     wire[3:0] posb; //对应DISP前4位数
     reg[3:0] digit; //对应x的某4位
+    reg dp; //小数点
+
     integer i;
 
     always @(posedge CLK) begin
@@ -27,10 +31,11 @@ module display_16bto4h #(parameter INTERVAL = 10*5/2)
             sel <= 0;
     end
     always @(sel) begin
-        digit[0] <= x[sel*4];
-        digit[1] <= x[sel*4 + 1];
-        digit[2] <= x[sel*4 + 2];
-        digit[3] <= x[sel*4 + 3];
+        digit[0] = x[sel*4];
+        digit[1] = x[sel*4 + 1];
+        digit[2] = x[sel*4 + 2];
+        digit[3] = x[sel*4 + 3];
+        dp = ~neg[sel];
     end
 
     decoder2to4 u_dec(sel, posb);//decode sel into posb
@@ -60,7 +65,7 @@ module display_16bto4h #(parameter INTERVAL = 10*5/2)
     endfunction
 
     always @(posedge CLK_2) begin
-        DISP <= {posb, btohDISP(digit), 1'b1};
+        DISP <= {posb, btohDISP(digit), dp};
     end
 
 

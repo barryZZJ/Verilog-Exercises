@@ -1,5 +1,6 @@
 //四选一选择器，
 //调用已分配好电路图的block design实现（design名为mux4to1_design）
+`timescale 1ps / 1ps
 module tb_mux4to1_design;
 
 reg [2:0] w0;

@@ -4,8 +4,8 @@ module gate_and3 #(parameter WIDTH = 32)
                   input[WIDTH-1:0] b,
                   input s1,
                   output[WIDTH-1:0] d);
-    assign d = s0 && s1 ? b : 0;
-    
+    assign d = {WIDTH{s0}} & {WIDTH{s1}} & b;
+
 endmodule
     
 module gate_or4 #(parameter WIDTH = 32)

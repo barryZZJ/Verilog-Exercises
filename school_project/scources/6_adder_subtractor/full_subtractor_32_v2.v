@@ -10,17 +10,12 @@ module full_subtractor_32_v2(input[31:0] x,
     assign cout = c[32];
     assign o = x[31] & y[31] & ~s[31] + ~x[31] & ~y[31] & s[31];
 
-    function ones_complement; //反码
-        input [31:0] x;
-        ones_complement = x ^ 32'hffffffff;
-    endfunction
-
     genvar i;
     generate
         for (i = 0; i<=31; i=i+1) begin: stage
             full_adder u_subtractor(.cin(c[i]),
                                     .x(x[i]),
-                                    .y(ones_complement(y[i])),
+                                    .y(~y[i]),
                                     .s(s[i]),
                                     .cout(c[i+1])
                                     );

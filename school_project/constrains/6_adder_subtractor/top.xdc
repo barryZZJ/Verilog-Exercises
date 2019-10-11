@@ -1,3 +1,4 @@
+#common
 #时钟
 set_property PACKAGE_PIN W5 [get_ports CLK]
 set_property IOSTANDARD LVCMOS33 [get_ports CLK]
@@ -5,10 +6,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports CLK]
 #开关
 set_property PACKAGE_PIN V17 [get_ports add_sub_signal]
 set_property IOSTANDARD LVCMOS33 [get_ports add_sub_signal]
-set_property PACKAGE_PIN V16 [get_ports {operand_control[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {operand_control[0]}]
-set_property PACKAGE_PIN W16 [get_ports {operand_control[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {operand_control[1]}]
 set_property PACKAGE_PIN V2 [get_ports {b[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {b[0]}]
 set_property PACKAGE_PIN T3 [get_ports {b[1]}]
@@ -51,3 +48,15 @@ set_property IOSTANDARD LVCMOS33 [get_ports {DISP[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {DISP[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {DISP[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {DISP[0]}]
+
+#top exclusive
+set_property PACKAGE_PIN V16 [get_ports {operand_control[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {operand_control[0]}]
+set_property PACKAGE_PIN W16 [get_ports {operand_control[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {operand_control[1]}]
+
+#top_v2 exclusive
+set_property PACKAGE_PIN U16 [get_ports LED_c]
+set_property IOSTANDARD LVCMOS33 [get_ports LED_c]
+set_property PACKAGE_PIN E19 [get_ports LED_o]
+set_property IOSTANDARD LVCMOS33 [get_ports LED_o]
