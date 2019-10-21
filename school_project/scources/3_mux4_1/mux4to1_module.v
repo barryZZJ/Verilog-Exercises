@@ -11,7 +11,7 @@ module mux4to1_module(input [2:0] w0,
             1: f = w1;
             2: f = w2;
             3: f = w3;
-            default: f = 4'bx;
+            default: f = 3'bx;
         endcase
     end
 endmodule
