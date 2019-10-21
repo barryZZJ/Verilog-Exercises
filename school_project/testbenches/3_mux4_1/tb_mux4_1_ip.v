@@ -28,15 +28,15 @@ mux4to1_ip utt
 
 initial begin
     repeat(2)begin
-        #5 s=2'b01;
-        #5 s=2'b10;
-        #5 s=2'b11;
-        #5
+        #10 s=2'b01;
+        #10 s=2'b10;
+        #10 s=2'b11;
+        #10
         $finish;
     end
 end
 
-always #5 begin
+always #2 begin
     w0 = w0 + 1;
     w1 = w1 + 1;
     w2 = w2 + 1;

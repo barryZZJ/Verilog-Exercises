@@ -31,10 +31,10 @@ mux4to1_design utt
 
 initial begin
     repeat(2)begin
-        #5 s=2'b01;
-        #5 s=2'b10;
-        #5 s=2'b11;
-        #5
+        #10 s=2'b01;
+        #10 s=2'b10;
+        #10 s=2'b11;
+        #10
         $finish;
     end
 end
@@ -47,3 +47,4 @@ always #5 begin
 end
 
 endmodule 
+TabNine::config

@@ -2,13 +2,6 @@
 
 module tb_mux4to1_module;
 
-reg [2:0] a;
-reg [2:0] b;
-reg [2:0] c;
-reg [2:0] d;
-reg [1:0] s;
-wire [2:0] y;
-
 reg [2:0] w0;
 reg [2:0] w1;
 reg [2:0] w2;
