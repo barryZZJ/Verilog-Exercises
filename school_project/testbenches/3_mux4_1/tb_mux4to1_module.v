@@ -32,9 +32,9 @@ initial begin
         #5 s=2'b01;
         #5 s=2'b10;
         #5 s=2'b11;
-        #5
-        $finish;
+        #5;
     end
+    $finish;
 end
 
 always #5 begin

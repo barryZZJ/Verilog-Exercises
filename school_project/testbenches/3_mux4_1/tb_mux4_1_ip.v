@@ -31,9 +31,9 @@ initial begin
         #10 s=2'b01;
         #10 s=2'b10;
         #10 s=2'b11;
-        #10
-        $finish;
+        #10;
     end
+    $finish;
 end
 
 always #2 begin

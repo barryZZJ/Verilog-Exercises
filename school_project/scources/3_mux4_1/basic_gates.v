@@ -26,3 +26,4 @@ module gate_nand #(parameter WIDTH = 32)
                    output[WIDTH-1:0] c);
     assign c = ~(a & b);
 endmodule
+TabNine::config
