@@ -1,6 +1,6 @@
 `timescale 1ps / 1ps
 
-module tb_ip_adder;
+module tb_system_adder_32;
 
     reg clk;
     //reg rst_n;
@@ -20,7 +20,7 @@ module tb_ip_adder;
         cin = 0;
     end
     
-    ip_adder utt(
+    system_adder_32 utt(
         //.rst_n (rst_n),
         .CLK (clk),
         .x(x),

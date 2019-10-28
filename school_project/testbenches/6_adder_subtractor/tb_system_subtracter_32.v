@@ -1,6 +1,6 @@
 `timescale 1ps / 1ps
 
-module tb_ip_subtracter;
+module tb_system_subtracter_32;
 
     reg clk;
     //reg rst_n;
@@ -18,7 +18,7 @@ module tb_ip_subtracter;
         y = 32'b101;
     end
     
-    ip_subtracter utt(
+    system_subtracter_32 utt(
         //.rst_n (rst_n),
         .CLK (clk),
         .x(x),

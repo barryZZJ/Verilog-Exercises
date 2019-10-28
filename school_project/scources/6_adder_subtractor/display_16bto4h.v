@@ -1,7 +1,8 @@
 //数码管显示模块
 //能将16位的二进制数以十六进制形式显示到4个七段数码管上
 //负数则小数点代表负号
-module display_16bto4h #(parameter INTERVAL = 10*5/2)
+//BASYS3板子自带的时钟CLK频率是100MHz，10^5即为 1ms
+module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，为1/INTERVAL Hz
                         (input CLK,
                          input [15:0] x,
                          input [3:0] neg, //各位是否为负数
@@ -11,8 +12,8 @@ module display_16bto4h #(parameter INTERVAL = 10*5/2)
     reg CLK_2 = 0;
 
     reg[1:0] sel = 0; //选择显示哪一位
-    wire[3:0] posb; //对应DISP前4位数
-    reg[3:0] digit; //对应x的某4位
+    wire[3:0] posb; //独热码，对应DISP前4位数，由sel控制，低电平有效
+    reg[3:0] digit; //取输入端口x的某4位
     reg dp; //小数点
 
     integer i;
@@ -20,28 +21,34 @@ module display_16bto4h #(parameter INTERVAL = 10*5/2)
     always @(posedge CLK) begin
         counter <= counter + 1;
         if (counter == INTERVAL)begin
+            //CLK每tick INTERVAL次CLK_2就tick一次
             CLK_2 = ~CLK_2;
             counter <= 0;
         end
     end
 
     always @(posedge CLK_2) begin
+        //CLK_2每tick一次数码管就显示下一位
         sel <= sel + 1;
         if (sel == 3)
             sel <= 0;
     end
+
+    decoder2to4 u_dec(sel, posb);//decode sel into posb，低电平有效
+
     always @(sel) begin
+        //digit对应取x的某4位
         digit[0] = x[sel*4];
         digit[1] = x[sel*4 + 1];
         digit[2] = x[sel*4 + 2];
         digit[3] = x[sel*4 + 3];
+        //dp取neg的第sel位
         dp = ~neg[sel];
     end
 
-    decoder2to4 u_dec(sel, posb);//decode sel into posb
-
-    function [6:0] btohDISP;
-        input[3:0] digit;//display 4'bin into hex display
+    //display 4'bin into hex display
+    function [6:0] btohDISP; 
+        input[3:0] digit;
         case (digit)
             4'h0:    btohDISP = 7'b0000001;
             4'h1:    btohDISP = 7'b1001111;
