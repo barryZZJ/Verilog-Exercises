@@ -64,9 +64,11 @@ module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，
 
     endfunction
 
-    always @(posedge CLK_2) begin
-    //把各个位组合起来显示在数码管上
-        DISP <= {posb, btohDISP(digit), dp};
+    always @(posedge CLK) begin
+        if (counter == INTERVAL)begin
+            //把各个位组合起来显示在数码管上
+            DISP <= {posb, btohDISP(digit), dp};
+        end
     end
 
 

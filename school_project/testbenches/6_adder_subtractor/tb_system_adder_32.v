@@ -3,7 +3,6 @@
 module tb_system_adder_32;
 
     reg clk;
-    //reg rst_n;
 
     //Inputs
     reg [31:0] x;
@@ -21,7 +20,6 @@ module tb_system_adder_32;
     end
     
     system_adder_32 utt(
-        //.rst_n (rst_n),
         .CLK (clk),
         .x(x),
         .y(y),
@@ -34,7 +32,6 @@ module tb_system_adder_32;
         clk=~clk;
 
     initial begin
-        //test code here
         repeat (10) #500 begin
             x = x + 500;
             y = y + 100;

@@ -1,5 +1,4 @@
 //5)系统自带的ip实现32位加减法器
-//特点，同步，结果比操作数晚两个tick
 
 //系统自带的加法器实现
 module system_adder_32(input CLK,

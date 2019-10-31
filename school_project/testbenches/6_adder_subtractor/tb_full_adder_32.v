@@ -2,9 +2,6 @@
 
 module tb_full_adder_32;
 
-    reg clk;
-    //reg rst_n;
-
     //Inputs
     reg cin;
     reg [31:0] x;
@@ -15,7 +12,6 @@ module tb_full_adder_32;
     wire cout;
 
     initial begin
-        clk = 0;
         cin = 0;
         x = 32'b0;
         y = 32'b0;
@@ -23,22 +19,13 @@ module tb_full_adder_32;
 
     full_adder_32 utt
     (
-        //.rst_n (rst_n),
-        //.clk (clk),
         .cin(cin),
         .x(x),
         .y(y),
-        .s(s),
-        .cout(cout)
+        .s(s)
     );
 
-    localparam CLK_PERIOD = 10;
-    always #(CLK_PERIOD/2) 
-        clk=~clk;
-
-
     initial begin
-        //test code here
         repeat(10) #5 begin
             x = x+1;
             y = y+5;

@@ -2,9 +2,6 @@
 
 module tb_decoder2to4;
 
-    reg clk;
-    //reg rst_n;
-
     //Inputs
     reg[1:0] x;
 
@@ -12,7 +9,6 @@ module tb_decoder2to4;
     wire[3:0] y;
 
     initial begin
-        clk = 0;
         x=0;
     end
     
@@ -20,10 +16,6 @@ module tb_decoder2to4;
         x,
         y
     );
-
-    localparam CLK_PERIOD = 10;
-    always #(CLK_PERIOD/2) 
-        clk=~clk;
 
     initial begin
         //test code here

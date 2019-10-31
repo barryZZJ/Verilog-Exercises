@@ -1,5 +1,5 @@
 `timescale 1ps / 1ps
-
+//数码管显示测试
 module tb_display;
 
     reg clk;
@@ -20,6 +20,7 @@ module tb_display;
     (
         .CLK(clk),
         .x(x),
+        .neg(4'b0),
         .DISP(disp)
     );
 
@@ -28,8 +29,7 @@ module tb_display;
         clk=~clk;
 
     initial begin
-        //test code here
-        repeat(16) #(5*CLK_PERIOD)
+        repeat(16) #(15*CLK_PERIOD)
             x = x + 1;
         $finish;
     end
