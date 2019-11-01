@@ -44,9 +44,9 @@ module tb_top;
         clk=~clk;
 
     initial begin
-        repeat(2) #500 begin //加法还是减法
-            repeat(2) #500 begin //控制三种显示内容
-                repeat(5) #500 begin //a, b值的变化
+        repeat(2) #150 begin //加法还是减法
+            repeat(2) #150 begin //控制三种显示内容
+                repeat(5) #150 begin //a, b值的变化
                     a = a + 5;
                     b = b + 1;
                 end

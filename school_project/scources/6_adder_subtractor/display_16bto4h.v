@@ -5,7 +5,7 @@
 module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，为1/INTERVAL Hz
                         (input CLK,//板子自带的clock
                          input [15:0] x, //要显示的16位数
-                         input [3:0] neg, //negative，控制各位是否为负数
+                         input neg, //negative，是否为负数（小数点亮），小数点只亮最后一位
                          output reg[11:0] DISP); // DISPLAY，数码管
 
     integer counter = 0;//计数器，记CLK tick的次数
@@ -13,21 +13,20 @@ module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，
     reg[1:0] sel = 0; //select，选择显示哪一位，取十进制数0~3，最后转换成posb四位独热码
     wire[3:0] posb; //pos binary，四位独热码，对应DISP前4位控制位，由sel控制，低电平有效，作用为：“DISP <= {posb, btohDISP(digit), dp};”
     reg[3:0] digit; //取输入端口x的某4位
-    reg dp; //小数点
-
-    integer i;
 
     always @(posedge CLK) begin
-        counter <= counter + 1;
         if (counter == INTERVAL)begin
             //sel依次取0, 1, 2, 3, 0, 1, 2, 3...每次控制一个数码管
-            sel <= sel + 1;
-            if (sel == 3) sel <= 0;
+            if (sel == 3) 
+                sel <= 0;
+            else
+                sel <= sel + 1;
+
             counter <= 0; //重置counter
+        end else begin
+            counter <= counter + 1; //CLK tick一次，counter计数一次
         end
     end
-
-    decoder2to4 u_dec(sel, posb);//低电平有效, 把0, 1, 2, 3对应转换成1110, 1101, 1011, 0111
 
     always @(sel) begin
         //digit对应取x的某4位
@@ -35,11 +34,20 @@ module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，
         digit[1] = x[sel*4 + 1];
         digit[2] = x[sel*4 + 2];
         digit[3] = x[sel*4 + 3];
-        //dp取neg的第sel位
-        dp = ~neg[sel];
     end
 
-    //控制显示数字的7~1位
+    //posb低电平有效, 把0, 1, 2, 3对应转换成1110, 1101, 1011, 0111
+    always @(sel) begin
+        case (sel)
+            0: posb = 4'b1110;
+            1: posb = 4'b1101;
+            2: posb = 4'b1011;
+            3: posb = 4'b0111;
+            default: posb = 4'b0;
+        endcase
+    end
+
+    //控制显示数字的7~1位abcdefg
     function [6:0] btohDISP; 
         input[3:0] digit;
         case (digit)
@@ -67,10 +75,8 @@ module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，
     always @(posedge CLK) begin
         if (counter == INTERVAL)begin
             //把各个位组合起来显示在数码管上
-            DISP <= {posb, btohDISP(digit), dp};
+            DISP <= {posb, btohDISP(digit), ~neg};
         end
     end
-
-
 
 endmodule

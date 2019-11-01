@@ -7,8 +7,8 @@ module full_subtractor_32_v2(input[31:0] x,
                              output o); //溢出
     wire [32:0] c;
     assign c[0] = 1;
-    assign cout = c[32];
-    assign o = x[31] & y[31] & ~s[31] + ~x[31] & ~y[31] & s[31];
+    assign cout = 1'b0; //进位只在涉及无符号数时有意义
+    assign o = x[31] & y[31] & ~s[31] + ~x[31] & ~y[31] & s[31]; //只有两操作数符号位相同，且与结果符号位不同时才溢出
 
     genvar i;
     generate

@@ -3,10 +3,11 @@
 //将SW15~SW12作为第一操作数（显示在左起第一个7段数码管上），
 //SW11~SW8作为第二操作数（显示在左起第二个7段数码管上），
 //注意，a,b代表两个操作数低四位，因此第四位不算符号位
-//SW0=0（1）时做加（减）法，
+//SW0=0（1）时做加（减）法，SW0对应add_sub_signal
 //将结果显示在左起第四个7段数码管上，
 //结果为负数时小数点亮
 //进位(LED0)和溢出(LED1)标志通过LED灯显示
+
 `timescale 1ps / 1ps
 
 module tb_top_v2;
@@ -47,8 +48,8 @@ module tb_top_v2;
 
     initial begin
         //test code here
-        repeat(2) #500 begin //加法还是减法
-            repeat(5) #500 begin //a, b值的变化
+        repeat(2) #150 begin //加法还是减法
+            repeat(5) #150 begin //a, b值的变化
                 a = a + 5;
                 b = b + 1;
             end

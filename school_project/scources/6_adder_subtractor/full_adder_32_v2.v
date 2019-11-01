@@ -9,7 +9,7 @@ module full_adder_32_v2(input cin,
     wire [32:0] c;
     assign c[0] = cin;
     assign cout = c[32]; 
-    assign o = x[31] & y[31] & ~s[31] + ~x[31] & ~y[31] & s[31];
+    assign o = 1'b0; //溢出只在使用有符号数时才有意义
     
     genvar i;
     generate
