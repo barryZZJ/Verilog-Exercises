@@ -57,10 +57,10 @@ module top_v2 #(parameter INTERVAL = 10**5/2)
             // a-b
             if (s_sub[31] == 0) begin
                 //正数
-                res = s_sub[15:0];
+                res[7:0] = s_sub[15:0];
             end else begin
                 //负数
-                res = s_neg[15:0];
+                res[7:0] = s_neg[15:0];
                 neg = 1'b1;
             end
             LED_c = cout_sub;
