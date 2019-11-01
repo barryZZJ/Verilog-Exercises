@@ -11,7 +11,7 @@ module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，
     integer counter = 0;//计数器，记CLK tick的次数
 
     reg[1:0] sel = 0; //select，选择显示哪一位，取十进制数0~3，最后转换成posb四位独热码
-    wire[3:0] posb; //pos binary，四位独热码，对应DISP前4位控制位，由sel控制，低电平有效，作用为：“DISP <= {posb, btohDISP(digit), dp};”
+    reg[3:0] posb; //pos binary，四位独热码，对应DISP前4位控制位，由sel控制，低电平有效，作用为：“DISP <= {posb, btohDISP(digit), dp};”
     reg[3:0] digit; //取输入端口x的某4位
 
     always @(posedge CLK) begin
@@ -75,7 +75,12 @@ module display_16bto4h #(parameter INTERVAL = 10**5/2)//控制数码管频率，
     always @(posedge CLK) begin
         if (counter == INTERVAL)begin
             //把各个位组合起来显示在数码管上
-            DISP <= {posb, btohDISP(digit), ~neg};
+            if (sel == 0)
+                //小数点显示在最低位
+                DISP <= {posb, btohDISP(digit), ~neg};
+            else
+                DISP <= {posb, btohDISP(digit), 1'b1};
+
         end
     end
 
