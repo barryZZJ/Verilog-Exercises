@@ -19,7 +19,7 @@ module top_v2 #(parameter INTERVAL = 10**5/2)
 
     wire[31:0] s_add; //存a+b
     wire[31:0] s_sub; //存a-b
-    wire[31:0] s_neg; //存-s，因为不能直接对-s取[15:0]
+    wire[31:0] s_neg; //存-s_sub，因为不能直接对-s_sub取[15:0]
     wire cout_add;
     wire cout_sub;
     wire overflow_add;
@@ -29,45 +29,9 @@ module top_v2 #(parameter INTERVAL = 10**5/2)
     
     full_adder_32_v2 u_fadder_32_v2(1'b0, {28'b0,a}, {28'b0,b}, s_add, cout_add, overflow_add);
     full_subtractor_32_v2 u_fsub_32_v2({28'b0,a}, {28'b0,b}, s_sub, cout_sub, overflow_sub);
+    assign s_neg = -s_sub;
 
     display_16bto4h #(INTERVAL) u_disp(CLK, res, neg, DISP);
-
-    //暂时不会动态修改task的参数，只能用笨办法写两个task了
-    task abs_3; //res赋值为s的绝对值，neg对应s的正负
-        parameter RMSB = 3; //res的最高位，两个操作数为3，结果为7
-        input[31:0] s;
-        output[RMSB:0] res;
-        output neg;
-        reg[31:0] s_neg;
-    begin
-        neg = 1'b0;
-        if(s[31] == 0) //正数
-            res = s[RMSB:0];
-        else begin //负数
-            s_neg = -s;
-            res = s_neg[RMSB:0];
-            neg = 1'b1;
-        end
-    end
-    endtask
-
-    task abs_7; //res赋值为s的绝对值，neg对应s的正负
-        parameter RMSB = 7; //res的最高位，两个操作数为3，结果为7
-        input[31:0] s;
-        output[RMSB:0] res;
-        output neg;
-        reg[31:0] s_neg;
-    begin
-        neg = 1'b0;
-        if(s[31] == 0) //正数
-            res = s[RMSB:0];
-        else begin //负数
-            s_neg = -s;
-            res = s_neg[RMSB:0];
-            neg = 1'b1;
-        end
-    end
-    endtask
 
     always @(a, b, add_sub_signal, s_add, s_sub, cout_add, cout_sub, overflow_add, overflow_sub) begin
         neg = 1'b0;//默认是正数
@@ -96,7 +60,6 @@ module top_v2 #(parameter INTERVAL = 10**5/2)
                 res = s_sub[15:0];
             end else begin
                 //负数
-                s_neg = -s;
                 res = s_neg[15:0];
                 neg = 1'b1;
             end

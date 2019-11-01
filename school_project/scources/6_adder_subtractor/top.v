@@ -16,12 +16,13 @@ module top #(parameter INTERVAL = 10**5/2)
 
     wire[31:0] s_add; //存a+b
     wire[31:0] s_sub; //存a-b
-    wire[31:0] s_neg; //存-s，因为不能直接对-s取[15:0]
+    wire[31:0] s_neg; //存-s_sub，因为不能直接对-s_sub取[15:0]
     reg[15:0] res; //要显示的内容
     reg neg; //结果有没有负号
     
     full_adder_32 u_fadder_32(1'b0, {28'b0,a}, {28'b0,b}, s_add);// 不带进位和溢出标志的加法器
     full_subtractor_32 u_fsub_32({28'b0,a}, {28'b0,b}, s_sub); // 不带进位和溢出标志的减法器
+    assign s_neg = -s_sub;
 
     display_16bto4h #(INTERVAL) u_disp(CLK, res, neg, DISP);
 
@@ -40,7 +41,6 @@ module top #(parameter INTERVAL = 10**5/2)
                         res = s_sub[15:0];
                     end else begin
                         //负数
-                        s_neg = -s;
                         res = s_neg[15:0];
                         neg = 1'b1;
                     end
