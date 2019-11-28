@@ -15,7 +15,7 @@ module ;
         clk = 0;
     end
     
-    (
+     (
         //.rst_n (rst_n),
         //.clk (clk),
     );
