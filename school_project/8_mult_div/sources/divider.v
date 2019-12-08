@@ -15,9 +15,6 @@ module divider #(parameter n = 16)
 
 reg [n-1:0] a;
 
-wire [n-1:0] rmb; //r minus dataB
-assign rmb = r - dataB;
-
 integer counter; //计数器，移位n次后说明计算结束
 always @(posedge clk) begin
     if (read) begin
@@ -36,7 +33,7 @@ always @(posedge clk) begin
         end else begin
             counter <= counter + 1;
             //a左移
-            a <= {a[n-2:0], a[n-1]};
+            a <= {a[n-2:0], 1'b0};
             //---------------------------------
             //判断 借位后的R 是否需要减去对应的B，q需要补1还是补0
             //同时r左移，低位补a的高位

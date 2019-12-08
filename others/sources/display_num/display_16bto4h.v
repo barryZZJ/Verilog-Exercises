@@ -8,7 +8,6 @@ module display_16bto4h #(parameter FREQ = 10**5/2)//控制数码管频率，为1
                          input [3:0] neg, //negative，控制各位是否为负数
                          output reg[11:0] DISP); // DISPLAY，数码管
 
-
     reg[1:0] sel = 0; //select，选择显示哪一位，取十进制数0~3，最后转换成posb四位独热码
     reg[3:0] posb; //pos binary，四位独热码，对应DISP前4位控制位，由sel控制，低电平有效，作用为：“DISP <= {posb, btohDISP(digit), dp};”
     reg[3:0] digit; //取输入端口x的某4位

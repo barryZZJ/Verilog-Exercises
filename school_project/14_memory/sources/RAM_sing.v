@@ -30,18 +30,24 @@ if (Sync_Async == 0) begin
 //同步读
 //在clk上升沿时读addr
     always @(posedge clk) begin
+
         data_out <= {(WIDTH-1){1'bx}};
         if (!we)
             data_out <= mem[addr];
+
     end
+
 end else begin
 //异步读
 //只要we无效，addr有效就开始读
     always @(*) begin
+
         data_out <= {(WIDTH-1){1'bx}};
         if (!we)
             data_out <= mem[addr];
+
     end
+    
 end
 
 endmodule 

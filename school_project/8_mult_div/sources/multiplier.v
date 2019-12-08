@@ -25,7 +25,7 @@ always @(posedge clk) begin
     //只读，保持默认值
         a <= {{n{1'b0}}, dataA};
         b <= dataB;
-        s <= s;
+        s <= {n{1'b0}};
         done <= 1'b0;
     end else if(e) begin
     //计算

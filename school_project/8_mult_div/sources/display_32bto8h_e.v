@@ -10,7 +10,7 @@ module display_32bto4h_e #(parameter FREQ = 10**5/2,  //FREQ控制数码管频�
                            output reg[11:0] DISP); // DISPLAY，数码管
 
     reg[1:0] sel[0:1] = {2'b0, 2'b0}; //select，选择显示到哪一个数码管，取十进制数0~7,sel[0]对应0~3，sel[1]对应4~7，最后转换成posb八位独热码
-    reg[3:0] posb = 4'b1111; //pos binary，4位独热码，由sel控制，低电平有效，在此代码起作用：“DISP <= {posb, btohDISP(digit), dp};”
+    reg[3:0] posb = 4'b116z11; //pos binary，4位独热码，由sel控制，低电平有效，在此代码起作用：“DISP <= {posb, btohDISP(digit), dp};”
     reg[3:0] digit = 4'b0000; //取输入端口x的某4位
     reg dp; //小数点
 

@@ -1,10 +1,10 @@
 #时钟
-set_property PACKAGE_PIN W5 [get_ports CLK]
-set_property IOSTANDARD LVCMOS33 [get_ports CLK]
+set_property PACKAGE_PIN W5 [get_ports clk]
+set_property IOSTANDARD LVCMOS33 [get_ports clk]
 
 #复位键（引脚默认是中间按钮U18）
-set_property PACKAGE_PIN U18 [get_ports RST]
-set_property IOSTANDARD LVCMOS33 [get_ports RST]
+set_property PACKAGE_PIN U18 [get_ports rst]
+set_property IOSTANDARD LVCMOS33 [get_ports rst]
 
 #[15:0]开关
 set_property PACKAGE_PIN V17 [get_ports {SW[0]}]

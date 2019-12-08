@@ -58,6 +58,28 @@ module tb_FIFO;
 
         #(CLK_PERIOD*9);
         //------------------------------
+        //测试同时独写
+        rst = 1'b1; //初始化
+        #(CLK_PERIOD*2);
+        rst = 1'b0;
+        
+        wr_en = 1'b1;
+        rd_en = 1'b0;
+
+        data_in = 8'h0_1;
+        repeat (3) #CLK_PERIOD
+            data_in = data_in + 1;
+        
+        rd_en = 1'b1;
+
+        repeat (6) #CLK_PERIOD
+            data_in = data_in + 1;
+        
+        wr_en = 1'b0;
+
+        #(CLK_PERIOD*4);
+
+        //------------------------------
         //测试复位
         rst = 1'b0;
         wr_en = 1'b1;
@@ -79,8 +101,6 @@ module tb_FIFO;
 
         rst = 1'b0;
         #(CLK_PERIOD*2);
-
-
 
 
         $finish;
