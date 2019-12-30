@@ -15,8 +15,13 @@ module tb_main;
     wire ldres;
     wire ldrst;
 
+    // wire X;
+    // wire Y;
+    // wire [1:0] curr_state;
+    // wire [1:0] next_state;
+
     initial begin
-        din = 8'b0100_1011;
+        din = 8'b0101_1011;
         btnclk = 1'b0;
         clk = 1'b0;
         rst = 1'b1;
@@ -40,25 +45,15 @@ module tb_main;
     initial begin
         //test code here
         read = 1'b1;
-
-        //按一次模拟时钟按键，重置
-        repeat (1*2) #CLK_PERIOD
-            btnclk = ~btnclk;
         #3
         rst = 1'b0;
-
-        //按一次模拟时钟按键，读取输入序列
-        repeat (1*2) #CLK_PERIOD
+        repeat (2*2) #(2*CLK_PERIOD)
             btnclk = ~btnclk;
-        #CLK_PERIOD
-
         read = 1'b0;
-
-        //按下八次模拟时钟按键，进行状态转换
-        repeat(8*2) #CLK_PERIOD
+        #3
+        repeat(9*2) #(3*CLK_PERIOD)
             btnclk = ~btnclk;
-        
-        #(CLK_PERIOD*2)
+        #10
 
         $finish;
     end

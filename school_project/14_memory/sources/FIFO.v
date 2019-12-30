@@ -23,8 +23,8 @@ always @(posedge clk) begin
     
     if (rst) begin
     //复位
-        front = 1;
-        rear = 0;
+        front <= 1;
+        rear <= 0;
         full <= 1'b0;
         empty <= 1'b1;
         data_out <= {(WIDTH-1){1'bx}};
@@ -41,7 +41,7 @@ always @(posedge clk) begin
             end else begin
             //没空
                 empty <= 1'b0;
-                if (front == (rear + 2) % maxSize)
+                if (front = (rear + 2) % maxSize)
                 //如果满了，就显示满信号
                     full <= 1'b1;
                 else

@@ -7,7 +7,7 @@ module par2ser(input [7:0] din,
 
 reg [7:0] mem = 8'b0;
 
-assign dout = mem[0];
+assign dout = mem[7];
 
 always @(posedge clk) begin
     if (rst)
@@ -15,7 +15,7 @@ always @(posedge clk) begin
     else if (read) 
         mem <= din;
     else
-        mem <= (mem >> 1'b1);
+        mem <= (mem << 1'b1);
     
 end
 endmodule

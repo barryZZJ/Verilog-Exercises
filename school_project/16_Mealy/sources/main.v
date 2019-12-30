@@ -1,6 +1,6 @@
 //检测是否存在1011
 module main #(parameter T50MS = 50*10**5)
-             (input [7:0] din, //开关并行输入8位，开关7~0，SW7为低位
+             (input [7:0] din, //开关并行输入8位，开关7~0
               input read,      //开始读取，开关15
               input rst,       //复位，开关14
               input clk,       //自带时钟
@@ -11,7 +11,12 @@ module main #(parameter T50MS = 50*10**5)
 //------------------------------
 //按键模拟时钟信号消抖
 wire btnclk_d;
-debkey #(T50MS) udeb(clk, btnclk, btnclk_d);
+if (T50MS == 0)
+//仿真用代码不用消抖
+    assign btnclk_d = btnclk;
+else
+//板子按键需要消抖
+    debkey #(T50MS) udeb(clk, btnclk, btnclk_d);
 //------------------------------
 //模拟按键提示灯
 assign ldclk = btnclk_d;
@@ -27,4 +32,4 @@ wire Y;
 assign ldres = Y;
 mealy umly (btnclk_d, rst, X, Y);
 
-endmodule 
+endmodule

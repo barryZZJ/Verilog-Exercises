@@ -30,18 +30,16 @@ module tb_multiplier;
 
     initial begin
         //test code here
-        a = 0;
-        b = 0;
-        repeat (10) #20 begin
+        a = 5;
+        b = 5;
+        repeat (2) #CLK_PERIOD begin
             read = 1'b1;
-            #20
+            #CLK_PERIOD
             read = 1'b0;
-            #500 //计算中
-            // rst = 1'b1;
-            // #5
-            // rst = 1'b0;
+            #(33*CLK_PERIOD) //计算中，需要32个时钟周期才能计算完
             e = 1'b0;
-            #50
+            //计算完成，修改操作数进行下一次计算
+            #CLK_PERIOD
             e=1'b1;
             a = a + 5;
             b = b + 2;

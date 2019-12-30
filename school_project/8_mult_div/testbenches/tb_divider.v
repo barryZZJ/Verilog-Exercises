@@ -34,13 +34,14 @@ module tb_divider;
         //test code here
         a = 405;
         b = 5;
-        repeat (10) #20 begin
+        repeat (2) #CLK_PERIOD begin
             read = 1'b1;
-            #20
+            #CLK_PERIOD
             read = 1'b0;
-            #500 //计算中
+            #(33*CLK_PERIOD) //计算中
             e = 1'b0;
-            #100
+            //计算完成，修改操作数，进行下一次计算
+            #CLK_PERIOD
             e = 1'b1;
             a = a - 23;
             b = b + 5;

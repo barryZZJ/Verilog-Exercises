@@ -3,7 +3,7 @@
 module ;
 
     reg clk;
-    //reg rst_n;
+    //reg rst;
 
     //Inputs
     reg ;
@@ -16,7 +16,7 @@ module ;
     end
     
      (
-        //.rst_n (rst_n),
+        //.rst (rst),
         //.clk (clk),
     );
 
